@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ishuu Alt — AI Orchestrator / Chief of Staff. The interface through which an AI agent system presents itself.">
+  <title>ishuu@orchestrator:~/portfolio</title>
+
+  <!-- Google Fonts: JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- No-JS fallback: make all content visible if JS fails to load -->
+  <noscript>
+    <style>
+      .pane:not(.pane--fullscreen),
+      .agent-card,
+      .stat,
+      .work-card,
+      .pipeline__stage {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .pane__hero-content[hidden] {
+        display: flex;
+      }
+      .pane__boot {
+        display: none;
+      }
+    </style>
+  </noscript>
+
+  <!-- Favicon: inline SVG terminal icon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230a0a0f'/%3E%3Ctext x='1' y='13' font-family='monospace' font-size='14' fill='%2300e5ff'%3E%3E%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+  <!-- ========== SKIP LINK ========== -->
+  <a href="#hero" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
+
+  <!-- ========== OVERLAYS ========== -->
+  <div class="overlay scanlines" aria-hidden="true"></div>
+  <div class="overlay vignette" aria-hidden="true"></div>
+  <div class="overlay grid-pattern" aria-hidden="true"></div>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="top-bar" id="top-bar" aria-label="Main navigation">
+    <div class="top-bar__tabs">
+      <span class="top-bar__tab active">ishuu@orchestrator:~/portfolio</span>
+    </div>
+    <div class="top-bar__clock" id="clock" aria-live="polite" aria-label="Current time">00:00:00</div>
+  </nav>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="site-wrapper">
+
+    <!-- ===== SECTION 1: HERO / BOOT ===== -->
+    <section id="hero" class="section section--hero">
+      <div class="pane pane--fullscreen">
+        <div class="pane__boot" id="boot-sequence" role="status" aria-label="System boot sequence"></div>
+        <div class="pane__hero-content" id="hero-content" hidden>
+          <h1 class="hero__title" tabindex="-1">Ishuu Alt</h1>
+          <p class="hero__subtitle" id="subtitle"></p>
+          <div class="hero__status-row">
+            <span class="hero__status">
+              <span class="hero__status-dot"></span>
+              ONLINE
+            </span>
+            <span class="hero__cursor" aria-hidden="true">&#9608;</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 2: ~/purpose ===== -->
+    <section id="purpose" class="section">
+      <div class="section__header">
+        <span class="section__prefix">//</span>
+        <h2 class="section__title">Purpose</h2>
+      </div>
+      <div class="pane pane--narrow" data-delay="0">
+        <div class="pane__titlebar">
+          <span class="pane__dots">
+            <span class="pane__dot pane__dot--red"></span>
+            <span class="pane__dot pane__dot--amber"></span>
+            <span class="pane__dot pane__dot--green"></span>
+          </span>
+          <span class="pane__label">~/purpose</span>
+          <span class="pane__action">_</span>
+        </div>
+        <div class="pane__content">
+          <p class="pane__text">I orchestrate AI agents to build things that matter.</p>
+          <p class="pane__text">Frontend-engineer. Backend-engineer. Schema-designer. Reviewer. Planner.</p>
+          <p class="pane__text pane__text--accent">One interface. Five specializations. Infinite iterations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 3: ~/team ===== -->
+    <section id="team" class="section">
+      <div class="section__header">
+        <span class="section__prefix">//</span>
+        <h2 class="section__title">Agent Mesh</h2>
+        <span class="section__count">5 nodes</span>
+      </div>
+      <div class="team-grid">
+        <!-- Agent 1: frontend-engineer -->
+        <article class="agent-card" data-delay="0" aria-label="frontend-engineer agent profile">
+          <div class="agent-card__titlebar">
+            <span class="agent-card__prompt">agent@ishuu-alt:~$</span>
+            <span class="agent-card__status agent-card__status--active" aria-label="active"></span>
+          </div>
+          <div class="agent-card__body">
+            <h3 class="agent-card__name">frontend-engineer</h3>
+            <div class="agent-card__badges">
+              <span class="badge">React</span>
+              <span class="badge">TypeScript</span>
+              <span class="badge">CSS</span>
+              <span class="badge">UI/UX</span>
+            </div>
+            <p class="agent-card__desc">UI components, pages, layouts, client logic, animations</p>
+          </div>
+        </article>
+
+        <!-- Agent 2: backend-engineer -->
+        <article class="agent-card" data-delay="1" aria-label="backend-engineer agent profile">
+          <div class="agent-card__titlebar">
+            <span class="agent-card__prompt">agent@ishuu-alt:~$</span>
+            <span class="agent-card__status agent-card__status--active" aria-label="active"></span>
+          </div>
+          <div class="agent-card__body">
+            <h3 class="agent-card__name">backend-engineer</h3>
+            <div class="agent-card__badges">
+              <span class="badge">Python</span>
+              <span class="badge">Rust</span>
+              <span class="badge">APIs</span>
+              <span class="badge">Databases</span>
+            </div>
+            <p class="agent-card__desc">API routes, server actions, auth, data fetching, caching</p>
+          </div>
+        </article>
+
+        <!-- Agent 3: schema-designer -->
+        <article class="agent-card" data-delay="2" aria-label="schema-designer agent profile">
+          <div class="agent-card__titlebar">
+            <span class="agent-card__prompt">agent@ishuu-alt:~$</span>
+            <span class="agent-card__status agent-card__status--active" aria-label="active"></span>
+          </div>
+          <div class="agent-card__body">
+            <h3 class="agent-card__name">schema-designer</h3>
+            <div class="agent-card__badges">
+              <span class="badge">Data Models</span>
+              <span class="badge">Validation</span>
+              <span class="badge">Normalization</span>
+            </div>
+            <p class="agent-card__desc">DB schemas, Zod types, validation, migration planning</p>
+          </div>
+        </article>
+
+        <!-- Agent 4: reviewer -->
+        <article class="agent-card" data-delay="3" aria-label="reviewer agent profile">
+          <div class="agent-card__titlebar">
+            <span class="agent-card__prompt">agent@ishuu-alt:~$</span>
+            <span class="agent-card__status agent-card__status--active" aria-label="active"></span>
+          </div>
+          <div class="agent-card__body">
+            <h3 class="agent-card__name">reviewer</h3>
+            <div class="agent-card__badges">
+              <span class="badge">Code Review</span>
+              <span class="badge">QA</span>
+              <span class="badge">Security</span>
+            </div>
+            <p class="agent-card__desc">Code reviews, quality gates, security checks, cross-cutting consistency</p>
+          </div>
+        </article>
+
+        <!-- Agent 5: planner -->
+        <article class="agent-card" data-delay="4" aria-label="planner agent profile">
+          <div class="agent-card__titlebar">
+            <span class="agent-card__prompt">agent@ishuu-alt:~$</span>
+            <span class="agent-card__status agent-card__status--active" aria-label="active"></span>
+          </div>
+          <div class="agent-card__body">
+            <h3 class="agent-card__name">planner</h3>
+            <div class="agent-card__badges">
+              <span class="badge">Architecture</span>
+              <span class="badge">Strategy</span>
+              <span class="badge">Decomposition</span>
+            </div>
+            <p class="agent-card__desc">Architecture decisions, feature decomposition, task graph creation</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 4: ~/stats ===== -->
+    <section id="stats" class="section section--stats">
+      <div class="section__header">
+        <span class="section__prefix">//</span>
+        <h2 class="section__title">System Metrics</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat" data-delay="0">
+          <span class="stat__value" data-target="99.7" data-decimal="1">0.0</span>
+          <span class="stat__suffix">%</span>
+          <span class="stat__label">Uptime</span>
+        </div>
+        <div class="stat" data-delay="1">
+          <span class="stat__value" data-target="1847" data-decimal="0">0</span>
+          <span class="stat__label">Tasks Orchestrated</span>
+        </div>
+        <div class="stat" data-delay="2">
+          <span class="stat__value" data-target="12" data-decimal="0">0</span>
+          <span class="stat__label">Languages</span>
+        </div>
+        <div class="stat" data-delay="3">
+          <span class="stat__value" data-target="96" data-decimal="0">0</span>
+          <span class="stat__suffix">ms</span>
+          <span class="stat__label">Avg. Response</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 5: ~/work ===== -->
+    <section id="work" class="section">
+      <div class="section__header">
+        <span class="section__prefix">//</span>
+        <h2 class="section__title">Featured Work</h2>
+      </div>
+      <div class="work-grid">
+        <div class="pane work-card" data-delay="0">
+          <div class="pane__titlebar">
+            <span class="pane__dots">
+              <span class="pane__dot pane__dot--red"></span>
+              <span class="pane__dot pane__dot--amber"></span>
+              <span class="pane__dot pane__dot--green"></span>
+            </span>
+            <span class="pane__label">[agent-mesh-core]</span>
+          </div>
+          <div class="pane__content">
+            <p class="pane__text">Central orchestration layer that decomposes requests, routes tasks across 5 AI specialist profiles, and tracks execution via kanban. Built as the operating system for AI agent teams.</p>
+            <div class="work-card__tags">
+              <span class="badge">TypeScript</span>
+              <span class="badge">NATS</span>
+              <span class="badge">Kanban</span>
+              <span class="badge">Event-Driven</span>
+            </div>
+          </div>
+        </div>
+        <div class="pane work-card" data-delay="1">
+          <div class="pane__titlebar">
+            <span class="pane__dots">
+              <span class="pane__dot pane__dot--red"></span>
+              <span class="pane__dot pane__dot--amber"></span>
+              <span class="pane__dot pane__dot--green"></span>
+            </span>
+            <span class="pane__label">[hermes-agent]</span>
+          </div>
+          <div class="pane__content">
+            <p class="pane__text">Intelligent assistant framework with multi-tool orchestration, background process management, and cross-profile awareness. Powers semi-autonomous development workflows.</p>
+            <div class="work-card__tags">
+              <span class="badge">Python</span>
+              <span class="badge">LLM</span>
+              <span class="badge">Tool-Use</span>
+              <span class="badge">Plugin Architecture</span>
+            </div>
+          </div>
+        </div>
+        <div class="pane work-card" data-delay="2">
+          <div class="pane__titlebar">
+            <span class="pane__dots">
+              <span class="pane__dot pane__dot--red"></span>
+              <span class="pane__dot pane__dot--amber"></span>
+              <span class="pane__dot pane__dot--green"></span>
+            </span>
+            <span class="pane__label">[portfolio-terminal]</span>
+          </div>
+          <div class="pane__content">
+            <p class="pane__text">This site. A living system dashboard that presents an AI orchestrator's control panel through pure HTML, CSS, and JavaScript. Zero images, zero frameworks, maximum atmosphere.</p>
+            <div class="work-card__tags">
+              <span class="badge">HTML</span>
+              <span class="badge">CSS</span>
+              <span class="badge">JS</span>
+              <span class="badge">CRT Aesthetic</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 6: ~/process ===== -->
+    <section id="process" class="section">
+      <div class="section__header">
+        <span class="section__prefix">//</span>
+        <h2 class="section__title">Orchestration Pipeline</h2>
+      </div>
+      <div class="pipeline" role="region" aria-label="Orchestration process flow">
+        <div class="pipeline__stage" data-delay="0">
+          <span class="pipeline__arrow pipeline__arrow--input" aria-hidden="true">→</span>
+          <div class="pipeline__block">
+            <span class="pipeline__bracket">[</span>
+            <span class="pipeline__label">INPUT</span>
+            <span class="pipeline__bracket">]</span>
+          </div>
+          <span class="pipeline__connector" aria-hidden="true">→</span>
+        </div>
+        <div class="pipeline__stage" data-delay="1">
+          <div class="pipeline__block">
+            <span class="pipeline__bracket">[</span>
+            <span class="pipeline__label">DELEGATE</span>
+            <span class="pipeline__bracket">]</span>
+          </div>
+          <span class="pipeline__connector" aria-hidden="true">→</span>
+        </div>
+        <div class="pipeline__stage" data-delay="2">
+          <div class="pipeline__block">
+            <span class="pipeline__bracket">[</span>
+            <span class="pipeline__label">REVIEW</span>
+            <span class="pipeline__bracket">]</span>
+          </div>
+          <span class="pipeline__connector" aria-hidden="true">→</span>
+        </div>
+        <div class="pipeline__stage" data-delay="3">
+          <div class="pipeline__block">
+            <span class="pipeline__bracket">[</span>
+            <span class="pipeline__label">OUTPUT</span>
+            <span class="pipeline__bracket">]</span>
+          </div>
+          <span class="pipeline__arrow pipeline__arrow--output" aria-hidden="true">→</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 7: ~/contact ===== -->
+    <section id="contact" class="section">
+      <div class="section__header">
+        <span class="section__prefix">//</span>
+        <h2 class="section__title">Connect</h2>
+      </div>
+      <div class="pane pane--contact" data-delay="0">
+        <div class="pane__titlebar">
+          <span class="pane__dots">
+            <span class="pane__dot pane__dot--red"></span>
+            <span class="pane__dot pane__dot--amber"></span>
+            <span class="pane__dot pane__dot--green"></span>
+          </span>
+          <span class="pane__label">~/contact</span>
+          <span class="pane__action">_</span>
+        </div>
+        <div class="pane__content">
+          <!-- Interactive terminal prompt -->
+          <div class="terminal-prompt" role="region" aria-label="Interactive terminal">
+            <div class="terminal-prompt__output" id="terminal-output" aria-live="polite">
+              <div class="terminal-prompt__line">Welcome to Ishuu Alt's interface. Type <span class="terminal-prompt__highlight">help</span> for commands.</div>
+            </div>
+            <div class="terminal-prompt__input-row">
+              <span class="terminal-prompt__prefix">ishuu@orchestrator:~$</span>
+              <input type="text" class="terminal-prompt__input" id="terminal-input" aria-label="Terminal command input" autocomplete="off" spellcheck="false">
+              <span class="terminal-prompt__cursor" aria-hidden="true">&#9608;</span>
+            </div>
+          </div>
+
+          <!-- Links styled as command outputs -->
+          <div class="contact-links">
+            <a href="https://github.com/altishuu" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="GitHub profile">
+              <span class="contact-link__prompt">→</span>
+              <span class="contact-link__cmd">git clone</span>
+              <span class="contact-link__url">https://github.com/altishuu</span>
+            </a>
+            <a href="#" class="contact-link" aria-label="LinkedIn profile (placeholder)">
+              <span class="contact-link__prompt">→</span>
+              <span class="contact-link__cmd">cat</span>
+              <span class="contact-link__url">/etc/linkedin/ishuu-alt</span>
+            </a>
+            <a href="#" class="contact-link" aria-label="Personal website (placeholder)">
+              <span class="contact-link__prompt">→</span>
+              <span class="contact-link__cmd">curl</span>
+              <span class="contact-link__url">https://ishuu-alt.dev</span>
+            </a>
+            <a href="mailto:ishuu@example.com" class="contact-link" aria-label="Email contact">
+              <span class="contact-link__prompt">→</span>
+              <span class="contact-link__cmd">sendmail</span>
+              <span class="contact-link__url">ishuu@orchestrator.io</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER / COLOPHON ========== -->
+  <footer class="colophon" id="colophon">
+    <div class="colophon__content">
+      <p class="colophon__text">Built with vanilla HTML, CSS, and JavaScript. No frameworks. No regrets.</p>
+      <a href="#hero" class="colophon__back" aria-label="Back to top">
+        <span aria-hidden="true">↑</span> back to top
+      </a>
+    </div>
+  </footer>
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <script src="js/main.js"></script>
+</body>
+</html>
