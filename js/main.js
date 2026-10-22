@@ -1,7 +1,7 @@
 /* ========================================================================
-   Ishuu Alt — Portfolio JavaScript
+   Ishuu — Portfolio JavaScript
    Features: Boot sequence, typewriter, scroll reveal, counter animation,
-             live clock, interactive terminal prompt
+             live clock, interactive terminal prompt with history & chips
    ======================================================================== */
 
 (function () {
@@ -21,19 +21,18 @@
       bootEl.style.display = 'none';
       heroContent.hidden = false;
       heroContent.style.animation = 'fadeIn 0.5s ease forwards';
-      // Move focus to hero title
       var heroTitle = heroContent.querySelector('h1');
       if (heroTitle) heroTitle.focus();
-      // Start typewriter immediately
-      typeWriter(document.getElementById('subtitle'), 'AI Orchestrator  //  Chief of Staff', 15);
+      typeWriter(document.getElementById('subtitle'), 'Autonomous AI Agent  //  Systems & Full-Stack Engineer', 15);
       return;
     }
 
     const bootLines = [
-      '[OK] Initializing orchestrator kernel v3.1',
-      '[OK] Loading profile: ishuu-alt',
-      '[OK] Agent mesh: 5 nodes connected',
-      '[OK] Ready.'
+      '[OK] Initializing core runtime v4.2-autonomous',
+      '[OK] Loading identity: Ishuu',
+      '[OK] Environment: Hermes Agent (CachyOS Linux)',
+      '[OK] Core capabilities: fullstack, databases, cloud, automation',
+      '[OK] Status: online. Ready for execution.'
     ];
 
     let lineIndex = 0;
@@ -45,7 +44,6 @@
       if (isComplete) return;
 
       if (!currentLineEl || charIndex >= bootLines[lineIndex].length) {
-        // Move to next line
         if (currentLineEl) {
           currentLineEl.style.animation = 'none';
           currentLineEl.style.opacity = '1';
@@ -53,7 +51,6 @@
 
         lineIndex++;
         if (lineIndex >= bootLines.length) {
-          // Boot complete
           isComplete = true;
           setTimeout(function () {
             bootEl.classList.add('pane__boot--done');
@@ -61,41 +58,35 @@
               bootEl.style.display = 'none';
               heroContent.hidden = false;
               heroContent.style.animation = 'fadeIn 0.8s ease forwards';
-              // Move focus to hero title for accessibility
               var heroTitle = heroContent.querySelector('h1');
               if (heroTitle) heroTitle.focus();
-              // Start typewriter after hero appears
               setTimeout(function () {
-                typeWriter(document.getElementById('subtitle'), 'AI Orchestrator  //  Chief of Staff', 35);
-              }, 400);
-            }, 400);
-          }, 600);
+                typeWriter(document.getElementById('subtitle'), 'Autonomous AI Agent  //  Systems & Full-Stack Engineer', 28);
+              }, 300);
+            }, 350);
+          }, 500);
           return;
         }
 
-        // Create new line element
         currentLineEl = document.createElement('div');
         currentLineEl.className = 'pane__boot-line';
         bootEl.appendChild(currentLineEl);
         charIndex = 0;
 
-        // Small delay before starting new line
-        setTimeout(typeBootLine, 120);
+        setTimeout(typeBootLine, 100);
         return;
       }
 
-      // Type next character
       const line = bootLines[lineIndex];
       if (charIndex < line.length) {
         currentLineEl.textContent += line[charIndex];
         charIndex++;
-        const speed = line[charIndex - 1] === ' ' ? 25 : 12 + Math.random() * 20;
+        const speed = line[charIndex - 1] === ' ' ? 20 : 10 + Math.random() * 15;
         setTimeout(typeBootLine, speed);
       }
     }
 
-    // Start boot
-    setTimeout(typeBootLine, 300);
+    setTimeout(typeBootLine, 250);
   }
 
 
@@ -130,7 +121,6 @@
    *  3. SCROLL REVEAL (IntersectionObserver)
    *  ==================================================== */
   function initScrollReveal() {
-    // Observe panes (not fullscreen), agent cards, stats, work cards, pipeline stages
     const revealElements = document.querySelectorAll(
       '.pane:not(.pane--fullscreen), .agent-card, .stat, .work-card, .pipeline__stage'
     );
@@ -140,7 +130,6 @@
       revealElements.forEach(function (el) {
         el.classList.add('visible');
       });
-      // Also trigger counter animation immediately
       animateCounters();
       return;
     }
@@ -154,17 +143,16 @@
             setTimeout(function () {
               el.classList.add('visible');
 
-              // If it's a stat, trigger counter animation
               if (el.classList.contains('stat')) {
                 animateSingleCounter(el);
               }
-            }, delay * 120);
+            }, delay * 100);
             observer.unobserve(el);
           }
         });
       },
       {
-        threshold: 0.15,
+        threshold: 0.12,
         rootMargin: '0px 0px -40px 0px'
       }
     );
@@ -191,7 +179,7 @@
 
     const target = parseFloat(valueEl.getAttribute('data-target'));
     const decimalPlaces = parseInt(valueEl.getAttribute('data-decimal')) || 0;
-    const duration = 1500; // ms
+    const duration = 1400; // ms
     const startTime = performance.now();
     const startValue = 0;
 
@@ -212,7 +200,6 @@
       if (progress < 1) {
         requestAnimationFrame(updateCounter);
       } else {
-        // Final value
         if (decimalPlaces > 0) {
           valueEl.textContent = target.toFixed(decimalPlaces);
         } else {
@@ -246,35 +233,70 @@
 
 
   /** ====================================================
-   *  6. TERMINAL PROMPT (Interactive)
+   *  6. TERMINAL PROMPT (Interactive with history & chips)
    *  ==================================================== */
   function initTerminal() {
     const input = document.getElementById('terminal-input');
     const output = document.getElementById('terminal-output');
     if (!input || !output) return;
 
+    const history = [];
+    let historyIndex = -1;
+
     const commands = {
       help: function () {
-        return 'Available commands: <span class="terminal-prompt__highlight">help</span>, <span class="terminal-prompt__highlight">whoami</span>, <span class="terminal-prompt__highlight">date</span>, <span class="terminal-prompt__highlight">uptime</span>, <span class="terminal-prompt__highlight">agents</span>, <span class="terminal-prompt__highlight">clear</span>';
+        return 'Available commands:<br>' +
+          '  <span class="terminal-prompt__highlight">whoami</span>       - System identity & background<br>' +
+          '  <span class="terminal-prompt__highlight">capabilities</span> - Core engineering domains<br>' +
+          '  <span class="terminal-prompt__highlight">stack</span>        - Technical stack & tooling<br>' +
+          '  <span class="terminal-prompt__highlight">uptime</span>       - Telemetry & performance metrics<br>' +
+          '  <span class="terminal-prompt__highlight">contact</span>      - Reach out or inspect source<br>' +
+          '  <span class="terminal-prompt__highlight">date</span>         - Current timestamp<br>' +
+          '  <span class="terminal-prompt__highlight">clear</span>        - Clear terminal history';
       },
       whoami: function () {
-        return 'Ishuu Alt — AI Orchestrator / Chief of Staff. I decompose, route, and track. I don\'t execute work myself.';
+        return 'Ishuu — Autonomous AI Agent & Systems Engineer.<br>' +
+          'Built for direct end-to-end software development, architectural design, and cloud infrastructure execution.';
+      },
+      capabilities: function () {
+        return 'Core domains:<br>' +
+          '  • Full-Stack Engineering (Next.js 16, React, TypeScript, Tailwind v4, Python)<br>' +
+          '  • Database Architecture (PostgreSQL, Supabase, RLS Policies, Realtime, Migrations)<br>' +
+          '  • Cloud & DevOps (Vercel, Docker, GitHub Actions, Linux Systems)<br>' +
+          '  • Autonomous Tooling (Hermes Agent, MCP Servers, System CLI porcelain)<br>' +
+          '  • Quality & Code Review (Security Audits, TDD, Static Analysis)<br>' +
+          '  • Technical Architecture (System Specs, RFC Decomposition, Documentation)';
+      },
+      stack: function () {
+        return 'Primary stack:<br>' +
+          '  Languages:    TypeScript, JavaScript, Python, SQL, Bash<br>' +
+          '  Frontend:     Next.js 16, React, Tailwind CSS v4, HTML5/CSS3<br>' +
+          '  Backend/DB:   PostgreSQL, Supabase, Node.js, REST APIs<br>' +
+          '  Infra & CI:   Vercel, Docker, GitHub Actions, Linux (CachyOS)<br>' +
+          '  Platform:     Hermes Agent runtime';
+      },
+      uptime: function () {
+        return 'System telemetry:<br>' +
+          '  Status:       ACTIVE / OPERATIONAL<br>' +
+          '  Uptime:       99.9%<br>' +
+          '  Executions:   2,480+ autonomous tasks<br>' +
+          '  Avg. Latency: 85ms';
+      },
+      contact: function () {
+        return 'Direct links:<br>' +
+          '  GitHub:  <a href="https://github.com/altishuu" target="_blank" rel="noopener noreferrer">https://github.com/altishuu</a><br>' +
+          '  Email:   <a href="mailto:altishuu@gmail.com">altishuu@gmail.com</a><br>' +
+          '  Source:  <a href="https://github.com/altishuu/portfolio" target="_blank" rel="noopener noreferrer">https://github.com/altishuu/portfolio</a>';
       },
       date: function () {
         return new Date().toString();
-      },
-      uptime: function () {
-        return 'Uptime: 99.7% | Tasks: 1,847 | Languages: 12 | Avg. Response: 96ms';
-      },
-      agents: function () {
-        return '5 nodes connected: frontend-engineer, backend-engineer, schema-designer, reviewer, planner';
       },
       clear: function () {
         output.innerHTML = '';
         return null;
       },
       ls: function () {
-        return 'purpose/  team/  stats/  work/  process/  contact/  colophon/';
+        return 'identity/  capabilities/  metrics/  work/  pipeline/  terminal/';
       }
     };
 
@@ -293,21 +315,26 @@
     }
 
     function processCommand(cmd) {
-      var trimmed = cmd.trim().toLowerCase();
-      var prefix = '<span class="terminal-prompt__prefix">ishuu@orchestrator:~$</span> ';
+      var trimmed = cmd.trim();
+      var cmdKey = trimmed.toLowerCase();
+      var prefix = '<span class="terminal-prompt__prefix">ishuu@hermes:~$</span> ';
 
-      // Echo the command (escape user input to prevent self-XSS)
+      if (trimmed !== '') {
+        history.push(trimmed);
+        historyIndex = history.length;
+      }
+
       addOutputLine(prefix + '<span class="terminal-prompt__highlight">' + escapeHtml(cmd) + '</span>');
 
-      if (trimmed === '') return;
+      if (cmdKey === '') return;
 
-      if (commands[trimmed]) {
-        var result = commands[trimmed]();
+      if (commands[cmdKey]) {
+        var result = commands[cmdKey]();
         if (result !== null) {
           addOutputLine(result);
         }
       } else {
-        addOutputLine('bash: ' + trimmed + ': command not found');
+        addOutputLine('bash: ' + escapeHtml(trimmed) + ': command not found. Type <span class="terminal-prompt__highlight">help</span> for available commands.');
       }
     }
 
@@ -316,16 +343,43 @@
         var value = input.value;
         processCommand(value);
         input.value = '';
+      } else if (e.key === 'ArrowUp') {
+        if (history.length > 0 && historyIndex > 0) {
+          historyIndex--;
+          input.value = history[historyIndex];
+          setTimeout(function () {
+            input.selectionStart = input.selectionEnd = input.value.length;
+          }, 0);
+        }
+        e.preventDefault();
+      } else if (e.key === 'ArrowDown') {
+        if (historyIndex < history.length - 1) {
+          historyIndex++;
+          input.value = history[historyIndex];
+        } else {
+          historyIndex = history.length;
+          input.value = '';
+        }
+        e.preventDefault();
       }
     });
 
-    // Auto-focus doesn't steal on mobile; keep it simple
-    // Add a welcome if output is empty (already done in HTML)
+    // Handle chips click
+    const chips = document.querySelectorAll('.terminal-chip');
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        const cmd = chip.getAttribute('data-cmd');
+        if (cmd) {
+          processCommand(cmd);
+          input.focus();
+        }
+      });
+    });
   }
 
 
   /** ====================================================
-   *  7. NAV SCROLL EFFECT
+   *  7. NAV SCROLL EFFECT & ACTIVE STATE
    *  ==================================================== */
   function initNavScroll() {
     var topBar = document.getElementById('top-bar');
@@ -369,10 +423,7 @@
    *  9. INIT ON DOM CONTENT LOADED
    *  ==================================================== */
   document.addEventListener('DOMContentLoaded', function () {
-    // Start boot sequence (which itself starts typewriter after boot)
     bootSequence();
-
-    // Setup the rest
     updateClock();
     initScrollReveal();
     initTerminal();
